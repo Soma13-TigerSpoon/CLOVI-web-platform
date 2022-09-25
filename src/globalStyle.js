@@ -48,8 +48,13 @@ body {
 	line-height: 1;
 	font-family: 'Montserrat', sans-serif;
 	line-height: 1.2;
-  height: 3000px;
+  	height: 100vh;
 }
+
+#root {
+	height: 100%;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;

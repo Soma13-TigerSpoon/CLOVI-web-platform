@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const WrappedButton = styled.button`
+const SButton = styled.button`
   font-size: 24px;
   border-radius: 10px;
   color: ${(props) => props.theme.clovi_white};
@@ -23,7 +23,7 @@ const WrappedButton = styled.button`
 `;
 
 const Button = (props) => (
-    <WrappedButton>{props.buttonAction}</WrappedButton>
+    <SButton>{props.buttonAction}</SButton>
 );
 
 export default Button;

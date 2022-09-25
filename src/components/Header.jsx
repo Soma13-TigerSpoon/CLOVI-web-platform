@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "./Button";
 
-const WrappedHeader = styled.header`
+const SHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +33,7 @@ const WrappedHeader = styled.header`
 
 const Header = () => {
   return (
-    <WrappedHeader>
+    <SHeader>
       <a className="logo" href="/">
         <img
           className="logo__img"
@@ -45,7 +45,7 @@ const Header = () => {
         <input className="sform__input" name="q" type="text"></input>
       </form>
       <Button buttonAction="클로비 설치하기"></Button>
-    </WrappedHeader>
+    </SHeader>
   );
 };
 
