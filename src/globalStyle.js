@@ -44,7 +44,6 @@ footer, header, hgroup, menu, nav, section {
 	box-sizing: border-box;
 }
 body {
-	font-weight: 300;
 	line-height: 1;
 	font-family: 'Montserrat', sans-serif;
 	line-height: 1.2;

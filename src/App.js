@@ -1,4 +1,7 @@
-// import logo from './logo.svg';
+import img1 from "./29cm1.jpeg";
+import img2 from "./29cm2.jpeg";
+import img3 from "./29cm3.jpeg";
+import img4 from "./29cm4.jpeg";
 // import "./App.css";
 import { GlobalStyle } from "./globalStyle";
 import Header from "./components/Header";
@@ -21,14 +24,49 @@ const Main = styled.main`
 `;
 
 const Results = styled.div`
+  margin-left: -20px;
   ul {
     display: flex;
     flex-wrap: wrap;
     li {
       width: 33.3%;
+      padding: 0 0 40px 20px;
+      img {
+        width: 100%;
+      }
+      .item__texts {
+        margin-top: 15px;
+        .item__texts__brand {
+          margin-bottom: 7px;
+          font-size: 13px;
+          text-decoration: underline;
+          line-height: 1.2;
+          font-weight: 700;
+          color: #000;
+        }
+        .item__texts__name {
+          font-weight: 500;
+          margin-bottom: 14px;
+          line-height: 16px;
+          padding-right: 10%;
+          font-size: 13px;
+          color: #5d5d5d;
+          word-break: break-all;
+        }
+        .item__texts__price {
+          font-size: 14px;
+          line-height: 16px;
+          vertical-align: top;
+          .price__number {
+            font-weight: 600;
+          }
+          .price__currency {
+            font-size: 12px;
+          }
+        }
+      }
     }
   }
-  
 `;
 
 function App() {
@@ -43,17 +81,159 @@ function App() {
           <div className="options"></div>
           <Results>
             <ul>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
-              <li>d</li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img1} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img2} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img3} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img4} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img1} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img2} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img3} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img4} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <div>
+                    <img src={img1} alt="item"></img>
+                    <div className="item__texts">
+                      <div className="item__texts__brand">에프터프레이</div>
+                      <div className="item__texts__name">
+                        투어리스트 발마칸 코트 네이비
+                      </div>
+                      <div className="item__texts__price">
+                        <span className="price__number">379,000</span>
+                        <span className="price__currency">원</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
             </ul>
           </Results>
         </Main>
