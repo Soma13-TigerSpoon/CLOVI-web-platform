@@ -1,7 +1,7 @@
-import img1 from "./29cm1.jpeg";
-import img2 from "./29cm2.jpeg";
-import img3 from "./29cm3.jpeg";
-import img4 from "./29cm4.jpeg";
+import img1 from "./assets/29cm1.jpeg";
+import img2 from "./assets/29cm2.jpeg";
+import img3 from "./assets/29cm3.jpeg";
+import img4 from "./assets/29cm4.jpeg";
 // import "./App.css";
 import { GlobalStyle } from "./globalStyle";
 import Header from "./components/Header";
@@ -69,6 +69,25 @@ const Results = styled.div`
   }
 `;
 
+const OptionButtons = styled.div`
+  padding: 24px 0px 18px 0px;
+  button {
+    margin-right: 18px;
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 300;
+    border: 1px solid ${(props) => props.theme.clovi_black};
+
+    &:hover {
+      color: ${(props) => props.theme.clovi_white};
+      background-color: ${(props) => props.theme.clovi_black};
+      font-weight: 600;
+    }
+
+  }
+`;
+
 function App() {
   return (
     <>
@@ -78,7 +97,11 @@ function App() {
         <Categories></Categories>
         <Main>
           <Filters></Filters>
-          <div className="options"></div>
+          <OptionButtons>
+            <button>전체</button>
+            <button>상품</button>
+            <button>영상</button>
+          </OptionButtons>
           <Results>
             <ul>
               <li>

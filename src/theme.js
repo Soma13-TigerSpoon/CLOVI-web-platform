@@ -3,5 +3,6 @@ export const theme1 = {
     clovi_red: '#EB5729',
     clovi_white: '#FFFFFF',
     clovi_grey: '#F6F8FA',
-    border_grey: '#D4D4D4'
+    border_grey: '#D4D4D4',
+    text_grey: '#5d5d5d'
 };
