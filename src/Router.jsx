@@ -12,9 +12,8 @@ function Router() {
           <Route path="item" element={<Home />}>
             <Route path=":itemId" element={<Home />}></Route>
           </Route>
-          <Route path="video/:videoId" element={<Video />}>
-          </Route>
         </Route>
+        <Route path="/video/:videoId" element={<Video />}></Route>
       </Routes>
     </BrowserRouter>
   );

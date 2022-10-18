@@ -1,5 +1,5 @@
 function Video () {
-    return '';
+    return <h1>Video</h1>;
 }
 
-export default Video
+export default Video;
