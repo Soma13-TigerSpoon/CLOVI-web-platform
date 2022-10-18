@@ -72,12 +72,57 @@ const SmallCategories = styled.div`
   }
 `;
 
+const dummyData = [
+  {
+    name: "핏더사이즈",
+    id: 1,
+    profileUrl:
+      "https://yt3.ggpht.com/ytc/AMLnZu-opBs4fsY6Vw06U1VMoTpcaepRcYtkmmPSuOl1=s176-c-k-c0x00ffffff-no-rj",
+    url: "https://www.youtube.com/c/%ED%95%8F%EB%8D%94%EC%82%AC%EC%9D%B4%EC%A6%88/about",
+  },
+  {
+    name: "킹타쿠Kingtaku",
+    id: 3,
+    profileUrl:
+      "https://yt3.ggpht.com/LFde7BcLM9FPCP8EyPwgEEFZBbeK7JrhvhVtgieYv1C5RNrzLGdBNtxI3Ti_M061AkyRryFyEA=s176-c-k-c0x00ffffff-no-rj",
+    url: "https://www.youtube.com/channel/UCN-hIUuioKIUh_K-ip7rchA",
+  },
+  {
+    name: "깡스타일리스트",
+    id: 4,
+    profileUrl:
+      "https://yt3.ggpht.com/ytc/AMLnZu8i1Pn_A2g9ru1wf1RaOE-jduiCJL2lX3WAabrb=s88-c-k-c0x00ffffff-no-rj",
+    url: "https://www.youtube.com/channel/UC8a6z7i9qypp9PqJ_0HhBrw",
+  },
+  {
+    name: "오정규",
+    id: 5,
+    profileUrl: null,
+    url: "https://www.youtube.com/channel/UCjD3iAk_WIUkiUk1tHYP9Cw",
+  },
+];
+
 const Filters = () => {
   return (
     <SFilter>
       <Creators>
         <ul>
-          <li className="creator selected">
+          {dummyData.map((channel) => {
+            const { name, id, profileUrl, url } = channel;
+            return (
+              <li className="creator" key={id}>
+                <div className="img-border">
+                  <img
+                    src={profileUrl}
+                    className="creator-profile"
+                    alt="creator profile"
+                  ></img>
+                </div>
+                <div className="creator-name">{name}</div>
+              </li>
+            );
+          })}
+          {/* <li className="creator selected">
             <div className="img-border">
               <img
                 src={profileImg1}
@@ -186,7 +231,7 @@ const Filters = () => {
               ></img>
             </div>
             <div className="creator-name">유튜버</div>
-          </li>
+          </li> */}
         </ul>
       </Creators>
       <SmallCategories>
