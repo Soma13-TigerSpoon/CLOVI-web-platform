@@ -1,10 +1,9 @@
 import {useState, useEffect} from 'react'
 import YouTube from 'react-youtube';
-
-function YT(){
+function Youtube({ urlId }){
   const [player, setPlayer] = useState();
   const [elapsed, setElapsed] = useState(0);
-  const [width, setWidth] = useState(600);
+  const width = 600;
   useEffect(() => {
     const interval = setInterval(async () => {
       const elapsed_sec = await player?.getCurrentTime(); // this is a promise. dont forget to await
@@ -27,7 +26,8 @@ function YT(){
     return () => {
       clearInterval(interval);
     };
-  });
+  }, [player]);
+  
   return <div className="player">
       <div style={{ display: 'flex', marginBottom: '1em' }}>
         <button type="button" onClick={() => player?.seekTo(120, true)}>
@@ -40,7 +40,7 @@ function YT(){
 
       {(
         <YouTube
-          videoId={'XxVg_s8xAms'}
+          videoId={urlId}
           opts={{
             width,
             height: width * (9 / 16),
@@ -55,13 +55,7 @@ function YT(){
     </div>
 }
 
-export function getPreItems(){
-    ;
-}
-export function getNextItems(){
-    ;
-}
-export default YT;
+export default Youtube;
 // function YT(){
 //   const [elapsed, setElapsed] = useState(0);
 //   const playerRef = useRef();
@@ -94,3 +88,4 @@ export default YT;
 //     </div><button onClick={() => playerRef.current.seekTo(120, true)}></button>
 //     </div>);
 // }
+
