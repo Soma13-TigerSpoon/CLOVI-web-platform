@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useState, useEffect} from 'react'
-import { getCurrentIndexByTime, getItems, timeline } from './Video';
+import { getCurrentIndexByTime, timeline } from './Video';
 import YouTube from 'react-youtube';
 function Youtube({ urlId, currentIndex, setCurrentIndex }){
   const [player, setPlayer] = useState();

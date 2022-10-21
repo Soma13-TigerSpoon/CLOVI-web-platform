@@ -3,34 +3,38 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Youtube from "./Youtube";
+import ItemList from "./ItemList";
 import { getVideoInfoByURL } from "../service/video";
 let videoData;
 export let timeline;
 function Video(){
     const [index, setIndex] = useState(-1);
     let {videoId} = useParams();
-    console.log(videoId);
     useEffect(()=>{
         setItems(videoId);
     },[]);
-    return <div id="youtube_controller">
+    return <Ybody>
         <Youtube urlId={videoId} currentIndex = {index} setCurrentIndex = {setIndex}></Youtube>
-    </div>
+        <ItemList index = {index} ></ItemList>
+    </Ybody>
 }
 
 export function getItems(curIndex){
     console.log(curIndex);
-    return videoData.lists[curIndex].items;
+    if(curIndex != -1)
+        return videoData.lists[curIndex].items;
+    else
+        return [];
 }
 async function setItems(urlId){
     let result = await getVideoInfoByURL(urlId);
     console.log(result);
     videoData = result;
+    videoData.lists.sort((a, b) => {return a.times.start - b.times.start;});
     timeline = [];
     for(let i=0;i<result.lists.length;++i){
         timeline.push(parseInt(result.lists[i].times.start));
     }
-    timeline.sort((a, b) => {return a - b;});
     console.log(timeline);
 }
 export function getCurrentIndexByTime(currentItemId,currentTime){
@@ -50,7 +54,15 @@ export function getCurrentIndexByTime(currentItemId,currentTime){
     }
     return currentItemId;
 }
+
 export default Video;
 
+const Ybody = styled.div`
+    height:100%;
+    display:flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+`
 
 
