@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Items from "./Item";
 function ItemList({index}){
+    //console.log(index);
     return <Clovi>
         <Clv_header></Clv_header>
         <Clv_main>
@@ -29,6 +30,7 @@ const Clv_header = styled.header`
     box-sizing: border-box;
     padding: 0px 12px;
     background-color: white;
+    border-bottom: #f2f2f2 solid 1px;
 `;
 const Clv_main = styled.div`
     display: flex;

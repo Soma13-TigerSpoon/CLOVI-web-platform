@@ -4,19 +4,26 @@ import { useParams } from "react-router-dom";
 
 import Youtube from "./Youtube";
 import ItemList from "./ItemList";
+import ItemGrid from "./ItemGrid";
 import { getVideoInfoByURL } from "../service/video";
-let videoData;
+export let videoData;
 export let timeline;
 function Video(){
     const [index, setIndex] = useState(-1);
+    const [isSuccess, setIsSuccess] = useState(false);
     let {videoId} = useParams();
     useEffect(()=>{
-        setItems(videoId);
+        setItems(videoId,setIsSuccess);
     },[]);
-    return <Ybody>
-        <Youtube urlId={videoId} currentIndex = {index} setCurrentIndex = {setIndex}></Youtube>
-        <ItemList index = {index} ></ItemList>
-    </Ybody>
+    return <VBody>
+                <Ybody>
+                    <Youtube urlId={videoId} currentIndex = {index} setCurrentIndex = {setIndex}></Youtube>
+                    <ItemList index = {index} ></ItemList>
+                </Ybody>
+                <YFotter>
+                    <ItemGrid flag = {isSuccess}></ItemGrid>
+                </YFotter>
+            </VBody>
 }
 
 export function getItems(curIndex){
@@ -26,7 +33,7 @@ export function getItems(curIndex){
     else
         return [];
 }
-async function setItems(urlId){
+async function setItems(urlId,setIsSuccess){
     let result = await getVideoInfoByURL(urlId);
     console.log(result);
     videoData = result;
@@ -36,6 +43,7 @@ async function setItems(urlId){
         timeline.push(parseInt(result.lists[i].times.start));
     }
     console.log(timeline);
+    setIsSuccess(true);
 }
 export function getCurrentIndexByTime(currentItemId,currentTime){
     let newCurrentItemId;
@@ -56,13 +64,26 @@ export function getCurrentIndexByTime(currentItemId,currentTime){
 }
 
 export default Video;
+const VBody = styled.div`
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+
+`;
 
 const Ybody = styled.div`
+    width: 100%;
     height:100%;
     display:flex;
     align-content: center;
     align-items: center;
     justify-content: space-evenly;
-`
+`;
 
-
+const YFotter = styled.div`
+    height:100px;
+`;

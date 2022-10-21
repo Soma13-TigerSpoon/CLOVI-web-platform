@@ -73,6 +73,7 @@ const Card = styled.div`
     width: 100%;
     margin-top: 1px;
     display: flex;
+    border-bottom: #f2f2f2 solid 1px;
 `;
 
 const Clv_item = styled.div`

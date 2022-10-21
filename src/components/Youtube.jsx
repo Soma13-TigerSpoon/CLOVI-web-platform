@@ -41,15 +41,12 @@ function Youtube({ urlId, currentIndex, setCurrentIndex }){
       <DivBtn className='Btn_time'>
             <button id="left" onClick={() => {
                 if(currentIndex!=0){
-                  console.log(currentIndex-1);
                   player?.seekTo(timeline[currentIndex-1], true);
-                  console.log(currentIndex, timeline[currentIndex]);
                 }
             }}>Left</button>
             <button id="right" onClick={() => {
                 if(currentIndex!=timeline.length-1){
                   player?.seekTo(timeline[currentIndex+1], true);
-                  console.log(currentIndex, timeline[currentIndex]);
                 }
             }}>Right</button>
         </DivBtn>
