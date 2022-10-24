@@ -1,18 +1,16 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Categories from "./components/Categories";
 import Home from "./components/Home";
+import Item from "./components/Item";
 import Video from "./components/Video";
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="category/:categoryId" element={<Categories />}></Route>
-          <Route path="item" element={<Home />}>
-            <Route path=":itemId" element={<Home />}></Route>
-          </Route>
-        </Route>
+        <Route path="/" element={<Navigate to="/list" />}></Route>
+        <Route path="/list/*" element={<Home />}></Route>
+        <Route path="/item/:itemId" element={<Item />}></Route>
         <Route path="/video/:videoId" element={<Video />}></Route>
       </Routes>
     </BrowserRouter>
