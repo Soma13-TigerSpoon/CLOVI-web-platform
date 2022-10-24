@@ -7,7 +7,7 @@ function ItemGrid({flag}){
         let itemList = getDistinctItemList();
         return <Items>
                 {
-                    itemList.map((item) => SmallItemCard(item))
+                    itemList.map((item, index) => SmallItemCard(item, index))
                 }
         </Items>
     }

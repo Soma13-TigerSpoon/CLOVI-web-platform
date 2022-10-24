@@ -106,7 +106,6 @@ const Clv_info_others = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-}
 `;
 
 const Clv_others_seller = styled.div`

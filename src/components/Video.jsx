@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Youtube from "./Youtube";
-import ItemList from "./ItemList";
+import TaggedItemList from "./TaggedItemList";
 import ItemGrid from "./ItemGrid";
 import { getVideoInfoByURL } from "../service/video";
 export let videoData;
@@ -18,7 +18,7 @@ function Video(){
     return <VBody>
                 <Ybody>
                     <Youtube urlId={videoId} currentIndex = {index} setCurrentIndex = {setIndex}></Youtube>
-                    <ItemList index = {index} ></ItemList>
+                    <TaggedItemList index = {index} ></TaggedItemList>
                 </Ybody>
                 <YFotter>
                     <ItemGrid flag = {isSuccess}></ItemGrid>

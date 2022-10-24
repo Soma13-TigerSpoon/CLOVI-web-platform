@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Items from "./Item";
+import Items from "./TaggedItem";
 function ItemList({index}){
     //console.log(index);
     return <Clovi>
