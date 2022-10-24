@@ -1,6 +1,40 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
+import CategoryLink from "./CategoryLink";
+
+const Categories = ({ categories, searchParams, setSearchParams }) => {
+  return (
+    <Wrapper>
+      <SCategories>
+        <h2>카테고리</h2>
+        <ul>
+          {categories.map((category) => {
+            const { categoryId, categoryName } = category;
+            return (
+              <li key={categoryId}>
+                <button
+                  onClick={() => {
+                    // searchParams.append('categoryId', categoryId)
+                    setSearchParams({ categoryId });
+                  }}
+                  className={
+                    searchParams.get("categoryId") &&
+                    searchParams.get("categoryId") === categoryId.toString()
+                      ? "selected"
+                      : ""
+                  }
+                >
+                  {categoryName}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </SCategories>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   width: 280px;
@@ -27,6 +61,10 @@ const SCategories = styled.div`
     text-align: left;
     outline: none;
     font-weight: 200;
+    .selected {
+      font-weight: 700;
+      color: ${(props) => props.theme.clovi_black};
+    }
     button {
       display: flex;
       width: 100%;
@@ -37,51 +75,5 @@ const SCategories = styled.div`
     }
   }
 `;
-
-const Categories = () => {
-  const [categories, setCategories] = useState([]);
-
-  // useEffect(() => {
-  //   const getData = () => {
-  //     fetch("https://test.clovi.app/api/v1/categories")
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log('data:', data);
-  //         setCategories((categories) => data.data);
-  //       })
-  //   }
-  //   getData();
-  // }, []);
-
-  useEffect(() => {
-    (async () => {
-      const response = await (await fetch(
-        "https://test.clovi.app/api/v1/categories"
-      )).json();
-      console.log("response:", response);
-      setCategories((categories) => response.data);
-    })();
-  }, []);
-
-  return (
-    <Wrapper>
-      <SCategories>
-        <h2>카테고리</h2>
-        <ul>
-          {categories.map((category) => {
-            const { categoryId, categoryName } = category;
-            return (
-              <li key={categoryId}>
-                <Link to={'category/'+categoryId}>
-                  <button>{categoryName}</button>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </SCategories>
-    </Wrapper>
-  );
-};
 
 export default Categories;
