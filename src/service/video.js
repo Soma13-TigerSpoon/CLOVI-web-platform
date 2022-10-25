@@ -1,4 +1,4 @@
-export function getVideoInfoById(videoId){
+export async function getVideoInfoByItemId(ItemId){
     ;
 }
 export async function getVideoInfoByURL(videoUrlId){
