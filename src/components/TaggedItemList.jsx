@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import Items from "./TaggedItem";
-function ItemList({index}){
+function TaggedItemList({index}){
     //console.log(index);
     return <Clovi>
         <Clv_header></Clv_header>
         <Clv_main>
             <Items index = {index}></Items>
         </Clv_main>
-    </Clovi>
+    </Clovi>;
 }
 
-export default ItemList;
 const Clovi = styled.div`
     width: 360px;
     min-height: 80px;
@@ -43,4 +42,6 @@ const Clv_main = styled.div`
     &::-webkit-scrollbar{
         display: none;
     }
-`
+`;
+
+export default TaggedItemList;

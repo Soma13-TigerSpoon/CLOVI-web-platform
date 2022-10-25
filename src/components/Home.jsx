@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 function Home() {
   const [categories, setCategories] = useState([]);
+  const [creators, setCreators] = useState([]);
   const [childCategories, setChildCategories] = useState([]);
   let [searchParams, setSearchParams] = useSearchParams();
   // setSearchParams();
@@ -21,7 +22,17 @@ function Home() {
       setCategories((categories) => response.data);
     })();
   }, []);
-
+  useEffect(() => {
+    // console.log('home effect executed');
+    (async () => {
+      const response = await (
+        await fetch("https://test.clovi.app/api/v1/channels")
+      ).json();
+      console.log("response:", response);
+      setCreators((creators) => response.data);
+      console.log(creators);
+    })();
+  }, []);
   useEffect(() => {
     console.log("search params changed!");
     for (const category of categories) {
@@ -46,6 +57,7 @@ function Home() {
             searchParams={searchParams}
             setSearchParams={setSearchParams}
             childCategories={childCategories}
+            creators={creators}
           ></Filters>
           <Results searchParams={searchParams}></Results>
         </Main>

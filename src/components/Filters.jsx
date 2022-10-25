@@ -1,14 +1,28 @@
 import styled from "styled-components";
 
-const Filters = ({ searchParams, setSearchParams, childCategories }) => {
+const Filters = ({
+  searchParams,
+  setSearchParams,
+  childCategories,
+  creators,
+}) => {
+  console.log(searchParams.get("channel"));
   return (
     <SFilter>
       <Creators>
         <ul>
-          {dummyData.map((channel) => {
+          {creators.map((channel) => {
             const { name, id, profileUrl, url } = channel;
             return (
-              <li className="creator" key={id}>
+              <CreatorsLi
+                className="creator"
+                key={id}
+                onClick={() => {
+                  searchParams.set("channel", name);
+                  setSearchParams(searchParams);
+                }}
+                selected={searchParams.get("channel") === name}
+              >
                 <div className="img-border">
                   <img
                     src={profileUrl}
@@ -17,7 +31,7 @@ const Filters = ({ searchParams, setSearchParams, childCategories }) => {
                   ></img>
                 </div>
                 <div className="creator-name">{name}</div>
-              </li>
+              </CreatorsLi>
             );
           })}
         </ul>
@@ -35,7 +49,8 @@ const Filters = ({ searchParams, setSearchParams, childCategories }) => {
                   }}
                   className={
                     searchParams.get("childCategoryId") &&
-                    searchParams.get("childCategoryId") === categoryId.toString()
+                    searchParams.get("childCategoryId") ===
+                      categoryId.toString()
                       ? "selected"
                       : ""
                   }
@@ -62,37 +77,39 @@ const Creators = styled.div`
   padding: 14px 10px 4px 10px;
   border: 1px solid ${(props) => props.theme.border_grey};
   li {
-    float: left;
-    display: flex;
-    align-items: center;
-    padding: 0px 20px 10px 10px;
-    .img-border {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        width: 32px;
-        border-radius: 50%;
-      }
-    }
-    .creator-name {
-      font-size: 12px;
-      padding-left: 8px;
-      color: ${(props) => props.theme.text_grey};
-    }
   }
-  .selected {
-    .creator-name {
-      /* text-decoration: underline; */
-      color: ${(props) => props.theme.clovi_black};
-      font-weight: 600;
+`;
+const CreatorsLi = styled.li`
+  float: left;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 10px 10px;
+  &:hover {
+    cursor: pointer;
+  }
+  .img-border {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 32px;
+      border-radius: 50%;
     }
-    .img-border {
-      border: 1.8px solid ${(props) => props.theme.clovi_red};
-    }
+    ${(props) =>
+      props.selected &&
+      `
+        border: 1.8px solid ${props.theme.clovi_red};
+    `}
+  }
+  .creator-name {
+    font-size: 12px;
+    padding-left: 8px;
+    color: ${(props) =>
+      props.selected ? props.theme.clovi_black : props.theme.text_grey};
+    font-weight: ${(props) => (props.selected ? 600 : "")};
   }
 `;
 
@@ -120,35 +137,5 @@ const SmallCategories = styled.div`
     }
   }
 `;
-
-const dummyData = [
-  {
-    name: "핏더사이즈",
-    id: 1,
-    profileUrl:
-      "https://yt3.ggpht.com/ytc/AMLnZu-opBs4fsY6Vw06U1VMoTpcaepRcYtkmmPSuOl1=s176-c-k-c0x00ffffff-no-rj",
-    url: "https://www.youtube.com/c/%ED%95%8F%EB%8D%94%EC%82%AC%EC%9D%B4%EC%A6%88/about",
-  },
-  {
-    name: "킹타쿠Kingtaku",
-    id: 3,
-    profileUrl:
-      "https://yt3.ggpht.com/LFde7BcLM9FPCP8EyPwgEEFZBbeK7JrhvhVtgieYv1C5RNrzLGdBNtxI3Ti_M061AkyRryFyEA=s176-c-k-c0x00ffffff-no-rj",
-    url: "https://www.youtube.com/channel/UCN-hIUuioKIUh_K-ip7rchA",
-  },
-  {
-    name: "깡스타일리스트",
-    id: 4,
-    profileUrl:
-      "https://yt3.ggpht.com/ytc/AMLnZu8i1Pn_A2g9ru1wf1RaOE-jduiCJL2lX3WAabrb=s88-c-k-c0x00ffffff-no-rj",
-    url: "https://www.youtube.com/channel/UC8a6z7i9qypp9PqJ_0HhBrw",
-  },
-  {
-    name: "오정규",
-    id: 5,
-    profileUrl: null,
-    url: "https://www.youtube.com/channel/UCjD3iAk_WIUkiUk1tHYP9Cw",
-  },
-];
 
 export default Filters;

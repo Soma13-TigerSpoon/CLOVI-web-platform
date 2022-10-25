@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import CategoryLink from "./CategoryLink";
 
 const Categories = ({ categories, searchParams, setSearchParams }) => {
   return (

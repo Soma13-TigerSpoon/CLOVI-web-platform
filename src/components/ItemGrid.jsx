@@ -5,7 +5,7 @@ function ItemGrid({flag}){
     console.log(flag);
     if(flag === true){
         let itemList = getDistinctItemList();
-        return <Items>
+        return <Items className='sdfjalkdjl'>
                 {
                     itemList.map((item, index) => SmallItemCard(item, index))
                 }

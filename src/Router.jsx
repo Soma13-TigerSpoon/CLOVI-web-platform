@@ -8,7 +8,8 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/list" />}></Route>
+        <Route path="/" element={<Navigate to="/list/items" />}></Route>
+        <Route path="/list" element={<Navigate to="/list/items" />}></Route>
         <Route path="/list/*" element={<Home />}></Route>
         <Route path="/item/:itemId" element={<Item />}></Route>
         <Route path="/video/:videoId" element={<Video />}></Route>

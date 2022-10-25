@@ -4,5 +4,6 @@ export const theme1 = {
     clovi_white: '#FFFFFF',
     clovi_grey: '#F6F8FA',
     border_grey: '#D4D4D4',
-    text_grey: '#5d5d5d'
+    text_grey: '#5d5d5d',
+    youtube_grey: '#606060'
 };

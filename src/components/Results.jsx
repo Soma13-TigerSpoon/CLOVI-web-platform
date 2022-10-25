@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useEffect } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useMatch } from "react-router-dom";
 import ItemsList from "./ItemsList";
 import VideosList from "./VideosList";
 
 function Results({ searchParams }) {
   const [items, setItems] = useState([]);
   const [videos, setVideos] = useState([]);
+  const itemsMatch = useMatch("list/items");
+  const videosMatch = useMatch("list/videos");
 
   const apiUrlDict = {
     channel: "channel",
@@ -35,86 +37,48 @@ function Results({ searchParams }) {
       setItems(response.data.items.content);
       console.log(items);
       setVideos(response.data.videos.content);
+      console.log(videos);
     })();
   }, [searchParams]);
 
   return (
     <>
       <OptionButtons>
-          <Link to={`items?${searchParams.toString()}`}><button>상품</button></Link>
-          <Link to={`videos?${searchParams.toString()}`}><button>영상</button></Link>
+        <Link to={`items?${searchParams.toString()}`}>
+          <OptionButton isActive={itemsMatch !== null}>상품</OptionButton>
+        </Link>
+        <Link to={`videos?${searchParams.toString()}`}>
+          <OptionButton isActive={videosMatch !== null}>영상</OptionButton>
+        </Link>
       </OptionButtons>
-      
+
       <Routes>
         <Route path="items" element={<ItemsList items={items} />} />
-        <Route path="videos" element={<VideosList />} />
+        <Route path="videos" element={<VideosList videos={videos} />} />
       </Routes>
     </>
   );
 }
 
-const List = styled.div`
-  margin-left: -20px;
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    li {
-      width: 33.3%;
-      padding: 0 0 40px 20px;
-      img {
-        width: 100%;
-      }
-      .item__texts {
-        margin-top: 15px;
-        .item__texts__brand {
-          margin-bottom: 7px;
-          font-size: 13px;
-          text-decoration: underline;
-          line-height: 1.2;
-          font-weight: 700;
-          color: #000;
-        }
-        .item__texts__name {
-          font-weight: 500;
-          margin-bottom: 14px;
-          line-height: 16px;
-          padding-right: 10%;
-          font-size: 13px;
-          color: #5d5d5d;
-          word-break: break-all;
-        }
-        .item__texts__price {
-          font-size: 14px;
-          line-height: 16px;
-          vertical-align: top;
-          .price__number {
-            font-weight: 600;
-          }
-          .price__currency {
-            font-size: 13px;
-          }
-        }
-      }
-    }
-  }
-`;
-
 const OptionButtons = styled.div`
   padding: 24px 0px 18px 0px;
-  button {
+`;
+
+const OptionButton = styled.button`
     margin-right: 18px;
     width: 80px;
     height: 30px;
     font-size: 12px;
     font-weight: 300;
     border: 1px solid ${(props) => props.theme.clovi_black};
-
+    color: ${props => props.isActive ? props.theme.clovi_white : props.theme.clovi_black };
+    background-color: ${props => props.isActive ? props.theme.clovi_black : props.theme.clovi_white };
+    font-weight: ${props => props.isActive ? 600 : '' };
     &:hover {
       color: ${(props) => props.theme.clovi_white};
       background-color: ${(props) => props.theme.clovi_black};
       font-weight: 600;
     }
-  }
 `;
 
 export default Results;
