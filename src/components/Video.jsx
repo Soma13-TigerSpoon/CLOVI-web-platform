@@ -1,79 +1,62 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import Youtube from "./Youtube";
 import TaggedItemList from "./TaggedItemList";
 import ItemGrid from "./ItemGrid";
-import { getVideoInfoByURL } from "../service/video";
 import Header from "./Header";
-export let videoData;
-export let timeline;
 function Video() {
   const [index, setIndex] = useState(-1);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [videoData, setVideoData] = useState([]);
+  const [timeline, setTimeline] = useState([]);
+  const [items, setItems] = useState([]);
   let { videoId } = useParams();
+
   useEffect(() => {
-    setItems(videoId, setIsSuccess);
+    if(videoData !== null && index > -1) setItems(videoData.lists[index].items);
+  }, [index]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await (
+        await fetch("https://api.clovi.app/api/v1/videos?videoUrl=" + videoId)
+      ).json();
+      console.log("response:", response);
+      setVideoData((videoData) => response.data);
+      let tl = []
+      for (let i = 0; i < response.data.lists.length; ++i) {
+        tl.push(parseInt(response.data.lists[i].times.start));
+      }
+      setTimeline(tl);
+    })();
   }, []);
+
   return (
     <>
-    <Header></Header>
-    <VBody>
-      <Ybody>
-        <Youtube
-          urlId={videoId}
-          currentIndex={index}
-          setCurrentIndex={setIndex}
-        ></Youtube>
-        <TaggedItemList index={index}></TaggedItemList>
-      </Ybody>
-      <YFotter>
-        <ItemGrid flag={isSuccess}></ItemGrid>
-      </YFotter>
-    </VBody>
+      <Header></Header>
+      <VBody>
+        <div className="ybody">
+          <Youtube
+            videoId={videoId}
+            index={index}
+            setIndex={setIndex}
+            timeline={timeline}
+          ></Youtube>
+          {videoData !== null ? (
+            <TaggedItemList
+              items={items}
+            ></TaggedItemList>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="yfooter">
+          <ItemGrid videoData={videoData}></ItemGrid>
+        </div>
+      </VBody>
     </>
   );
 }
-
-export function getItems(curIndex) {
-  console.log(curIndex);
-  if (curIndex != -1) return videoData.lists[curIndex].items;
-  else return [];
-}
-async function setItems(urlId, setIsSuccess) {
-  let result = await getVideoInfoByURL(urlId);
-  console.log(result);
-  videoData = result;
-  videoData.lists.sort((a, b) => {
-    return a.times.start - b.times.start;
-  });
-  timeline = [];
-  for (let i = 0; i < result.lists.length; ++i) {
-    timeline.push(parseInt(result.lists[i].times.start));
-  }
-  console.log(timeline);
-  setIsSuccess(true);
-}
-export function getCurrentIndexByTime(currentItemId, currentTime) {
-  let newCurrentItemId;
-  if (currentTime < timeline[0]) {
-    newCurrentItemId = -1;
-  } else {
-    for (let i = timeline.length - 1; i > -1; i--) {
-      if (currentTime >= timeline[i]) {
-        newCurrentItemId = i;
-        break;
-      }
-    }
-  }
-  if (newCurrentItemId != currentItemId) {
-    currentItemId = newCurrentItemId;
-  }
-  return currentItemId;
-}
-
-export default Video;
 
 const VBody = styled.div`
   height: 100%;
@@ -82,17 +65,17 @@ const VBody = styled.div`
   align-items: center;
   justify-content: center;
   overflow-y: scroll;
+  .ybody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .yfooter {
+    height: 100px;
+  }
 `;
 
-const Ybody = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: space-evenly;
-`;
-
-const YFotter = styled.div`
-  height: 100px;
-`;
+export default Video;

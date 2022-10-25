@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Categories from "./components/Categories";
 import Home from "./components/Home";
 import Item from "./components/Item";
 import Video from "./components/Video";
