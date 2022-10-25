@@ -1609,7 +1609,6 @@ const ItemInfoArea = styled.div`
     width:600px;
     height: 600px;
     justify-content: space-evenly;
-}
 `;
 
 const ShopInfoArea = styled.div`    
