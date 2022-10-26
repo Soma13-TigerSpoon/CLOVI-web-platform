@@ -1,28 +1,23 @@
 import styled from "styled-components";
 
-function ModelList({ datas, setIndex }) {
+function ModelList({ datas, setIndex, setModelClick }) {
   return datas.map((data) => (
     <ModelChannelCard
       onClick={() => {
         setIndex(data.index);
-        console.log(data.index);
+        setModelClick(true);
       }}
     >
       <div className="modelInfo">
         <div className="modelInfo__name">{data.model.name}</div>
-        <ModelSpec>
-          {data.model.height_cm}cm {data.model.weight_kg}kg
-        </ModelSpec>
+          {data.model.height_cm}cm {data.model.weight_kg}kg {data.videoUrl} {data.time}
       </div>
-      <ChannelInfo>
-        <ChannelName>{data.channelName}</ChannelName>
-        <DirectLink
-          href={`https://www.youtube.com/watch?v=${data.videoUrl}&t=${data.time}s`}
-          target="_blank"
-        >
+      <div className="channelInfo">
+        <div>{data.channelName}</div>
+        <a href={`https://www.youtube.com/watch?v=${data.videoUrl}&t=${data.time}s`} target="_blank"  rel="noreferrer">
           바로가기
-        </DirectLink>
-      </ChannelInfo>
+        </a>
+      </div>
     </ModelChannelCard>
   ));
 }
@@ -36,13 +31,9 @@ const ModelChannelCard = styled.div`
     display: flex;
     flex-direction: column;
   }
+  .channelInfo{
+    display: flex;
+    flex-direction: column;
+  }
 `;
-const ChannelInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const ModelSpec = styled.div``;
-const ChannelName = styled.div``;
-const DirectLink = styled.a``;
-
 export default ModelList;
