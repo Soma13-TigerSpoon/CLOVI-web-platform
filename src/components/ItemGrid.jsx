@@ -1,6 +1,7 @@
 import styled from "styled-components";
 function ItemGrid({ videoData }) {
   let itemList = getDistinctItemList(videoData);
+  console.log(itemList);
   return (
     <Items>
       {itemList.map((item, index) => (
@@ -12,7 +13,7 @@ function ItemGrid({ videoData }) {
   );
 }
 function getDistinctItemList(videoData) {
-  if(videoData){
+  if(videoData.length){// videoData -> videoData.length로 바꿈
     let result = {};
     let count = 0;
     for (let i = 0; i < videoData.lists.length; ++i) {
