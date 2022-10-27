@@ -5,8 +5,6 @@ import Youtube from "./Youtube";
 import TaggedItemList from "./TaggedItemList";
 import VideoItemsList from "./VideoItemsList";
 import Header from "./Header";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 function Video() {
   const [index, setIndex] = useState(-1);
