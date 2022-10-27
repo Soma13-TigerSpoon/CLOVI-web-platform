@@ -17,9 +17,11 @@ function Results({ searchParams }) {
     categoryId: "parent_category",
     childCategoryId: "child_category",
     page: "page",
+    q: "keyword"
   };
 
   useEffect(() => {
+    console.log('searchParams.get(q):', searchParams.get('q'));
     const queryStringObj = {};
     for (const [key, value] of searchParams.entries()) {
       queryStringObj[apiUrlDict[key]] = value;
@@ -27,10 +29,11 @@ function Results({ searchParams }) {
     queryStringObj["size"] = 3 * 16;
     const qs = queryString.stringify(queryStringObj);
     // console.log(qs);
-    console.log("requesting url: https://test.clovi.app/api/v1/search?" + qs);
+    let fetchUrl = 'https://test.clovi.app/api/v1/search?';
+    console.log(`requesting url: ${fetchUrl}` + qs);
     (async () => {
       const response = await (
-        await fetch("https://test.clovi.app/api/v1/search?" + qs)
+        await fetch(fetchUrl + qs)
       ).json();
       console.log("response:", response);
       // https://test.clovi.app/api/v1/search?channel={A}&parent_category={B}&child_category={C}&page={D}&size={E}&sort={F}

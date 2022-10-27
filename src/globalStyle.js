@@ -25,6 +25,10 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+input {
+	all: unset;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
