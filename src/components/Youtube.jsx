@@ -18,77 +18,78 @@ function getCurrentIndexByTime(currentItemId, currentTime, timeline) {
     currentItemId = newCurrentItemId;
   }
   return currentItemId;
-};
+}
 
-function Youtube({ videoId, index, setIndex, timeline }) {
+function Youtube({ videoId, index, setIndex, timeline, buttonClick }) {
   const [player, setPlayer] = useState();
   const [elapsed, setElapsed] = useState(0);
-  const width = 600;
-
+  // const width = 800;
+  console.log(timeline);
   useEffect(() => {
+    console.log("player changed");
     const interval = setInterval(() => {
       const elapsed_sec = Math.floor(player?.getCurrentTime()); // this is a promise. dont forget to await
       setElapsed(elapsed_sec);
+      // console.log("setting index...");
+      console.log(
+        "getcurrindexbytime",
+        getCurrentIndexByTime(index, elapsed_sec, timeline)
+      );
       setIndex(getCurrentIndexByTime(index, elapsed_sec, timeline));
-    }, 1000); // 100 ms refresh. increase it if you don't require millisecond precision
+    }, 100); // 100 ms refresh. increase it if you don't require millisecond precision
     return () => {
       clearInterval(interval);
     };
   }, [player]);
 
+  useEffect(() => {
+    console.log("index changed:", index);
+    player?.seekTo(timeline[index], true);
+  }, [buttonClick]);
+
   return (
-    <div className="player">
-      {
-        <YouTube
-          videoId={videoId}
-          opts={{
-            width,
-            height: width * (9 / 16),
-            playerVars: {
-              autoplay: 0,
-            },
-          }}
-          className="container"
-          onReady={(event) => setPlayer(event.target)}
-        />
-      }
-      <div style={{ display: "flex", marginBottom: "1em" }}>
+    <Container className="player">
+      <YouTube
+        videoId={videoId}
+        opts={{
+          playerVars: {
+            autoplay: 0,
+          },
+        }}
+        className="container"
+        onReady={(event) => {
+          setPlayer(event.target);
+          event.target.playVideo();
+        }}
+      />
+
+      {/* <div style={{ display: "flex", marginBottom: "1em" }}>
         <div>Current Time : {elapsed}</div>
         <div>Current Index : {index}</div>
-      </div>
-      <DivBtn className="Btn_time">
-        <button
-          id="left"
-          onClick={() => {
-            if (index !== 0) {
-              player?.seekTo(timeline[index - 1], true);
-            }
-          }}
-        >
-          Left
-        </button>
-        <button
-          id="right"
-          onClick={() => {
-            if (index !== timeline.length - 1) {
-              player?.seekTo(timeline[index + 1], true);
-            }
-          }}
-        >
-          Right
-        </button>
-      </DivBtn>
-    </div>
+      </div> */}
+    </Container>
   );
 }
 
-export default Youtube;
-
-const DivBtn = styled.div`
-  width: 600px;
+const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 24px 0 0;
+  .container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+    @media only screen and (min-width: 1600px) {
+      max-width: 1280px;
+    }
+  }
 `;
+
+export default Youtube;
 
 // function YT(){
 //   const [elapsed, setElapsed] = useState(0);

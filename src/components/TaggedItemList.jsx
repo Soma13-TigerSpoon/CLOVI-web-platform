@@ -3,10 +3,19 @@ function TaggedItemList({ items }) {
   //console.log(index);
   return (
     <Clovi>
-      <ClvHeader></ClvHeader>
+      <ClvHeader>
+        <div className="header__left">
+          <img
+            className="logo__img"
+            alt="logo"
+            src={`${process.env.REACT_APP_IMAGE_RESOURCE_URL}clovi-img-logo-w-text.png`}
+          ></img>
+          <span>자동 검색 서비스</span>
+        </div>
+      </ClvHeader>
       <ClvMain>
-        {items.map((data) => (
-          <Card>
+        {items.map((data, index) => (
+          <Card key={index}>
             <a href="naver.com" data-item-id={data.item.id} target="_blank">
               <div className="item">
                 <img
@@ -16,7 +25,7 @@ function TaggedItemList({ items }) {
                 />
                 <div className="itemInfo">
                   <div className="itemInfo__name">
-                    <span>[{data.item.brand}]</span>
+                    <span >[{data.item.brand}] </span>
                     <span>{data.item.name}</span>
                   </div>
                   <div className="itemInfo__others">
@@ -69,13 +78,16 @@ function TaggedItemList({ items }) {
 }
 
 const Clovi = styled.div`
-  width: 360px;
-  min-height: 80px;
-  max-height: 420px;
-  border-radius: 10px;
+  width: 395px;
+  min-height: 88px;
+  height: 100%;
+  /* max-height:  */
+  /* border-radius: 10px; */
   /* overflow: hidden; */
   overflow: hidden;
-  box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;
+  border: 1px solid ${(props) => props.theme.border_grey};
+  background-color: ${(props) => props.theme.background_grey};
+  /* box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px; */
 `;
 
 const ClvHeader = styled.header`
@@ -88,32 +100,52 @@ const ClvHeader = styled.header`
   padding: 0px 12px;
   background-color: white;
   border-bottom: #f2f2f2 solid 1px;
+  .header__left {
+    display: flex;
+    align-items: center;
+    .logo__img {
+      width: 54px;
+      margin-right: 5px;
+    }
+    span {
+      font-size: 12px;
+      font-weight: bold;
+      padding-top: 1px;
+    }
+  }
 `;
 const ClvMain = styled.div`
+  padding: 0 9px 9px 9px;
   display: flex;
+  max-height: 530px;
   flex-direction: column;
-  width: 360px;
+  width: 100%;
   overflow-y: scroll;
-  max-height: 380px;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none;
   }
+  @media only screen and (min-width: 1600px) {
+    max-height: 676px;
+  }
 `;
 
 const Card = styled.div`
   width: 100%;
-  margin-top: 1px;
+  margin-top: 5px;
   display: flex;
   border-bottom: #f2f2f2 solid 1px;
+  a {
+    width: 100%;
+  }
   .item {
     background-color: white;
-    padding: 8px;
-    width: 336px;
+    padding: 8px 14px 8px 8px;
+    width: 100%;
     display: flex;
     &:hover {
-      background-color: #f2f2f2;
+      /* background-color: #f2f2f2; */
       cursor: pointer;
     }
     .itemImg {
