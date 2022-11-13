@@ -152,7 +152,9 @@ const DivBtn = styled.div`
     margin: 10px;
     padding: 10px;
     .leftIcon {
+      -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
+      z-index: -1;
     }
     span {
       padding: 0 10px;
