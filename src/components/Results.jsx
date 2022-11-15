@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
 import { Link, Route, Routes, useMatch } from "react-router-dom";
@@ -29,7 +28,7 @@ function Results({ searchParams }) {
     queryStringObj["size"] = 3 * 16;
     const qs = queryString.stringify(queryStringObj);
     // console.log(qs);
-    let fetchUrl = 'https://test.clovi.app/api/v1/search?';
+    let fetchUrl = 'https://api.clovi.app/api/v1/search?';
     console.log(`requesting url: ${fetchUrl}` + qs);
     (async () => {
       const response = await (
