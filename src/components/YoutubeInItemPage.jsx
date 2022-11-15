@@ -1,44 +1,68 @@
 import styled from "styled-components";
-import {useState, useEffect} from 'react'
-import YouTube from 'react-youtube';
-function YoutubePlayer({data, modelClick, setModelClick}){
-  const [videoUrlId,setVideoUrlId] = useState('');
-  const [time,setTime] = useState(0);
+import { useState, useEffect } from "react";
+import YouTube from "react-youtube";
+const YoutubePlayer = ({ data, play, click, setClick }) => {
+  // const [videoUrlId, setVideoUrlId] = useState("");
+  // const [time, setTime] = useState(0);
   const [player, setPlayer] = useState();
   const width = 600;
-  useEffect(()=>{
-    if(videoUrlId !== data.videoUrl){
-      setVideoUrlId(data.videoUrl);
-      setTime(data.time);
+
+  // useEffect(() => {
+  //   if(play){
+  //     player?.playVideo();
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    console.log('dfsdfsf');
+    if (play !== -1) {
+      if (play){
+        console.log('play')
+        player?.seekTo(data.time);
+        player?.playVideo();
+      }else {
+        console.log("don't play");
+        player?.pauseVideo();
+      }
     }
-  },[data]);
-  useEffect(() =>{
-    if(modelClick) {
-      player?.seekTo(data.time);
-      setModelClick(false);
+    setClick(false);
+  }, [play, click]);
+
+  return (
+    <Container className="player">
+      {
+        <YouTube
+          videoId={data.videoUrl}
+          opts={{
+            width,
+            playerVars: {
+              autoplay: 0,
+              start: data.time,
+            },
+          }}
+          className="container"
+          onReady={(event) => setPlayer(event.target)}
+        />
+      }
+    </Container>
+  );
+};
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 0 0;
+  .container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    iframe {
+      width: 100%;
+      height: 100%;
     }
-  },[modelClick])
-  return <div className="player">
-    {(
-      <YouTube
-        videoId={data.videoUrl}
-        opts={{
-          width,
-          height: width * (9 / 16),
-          playerVars: {
-            autoplay: 1,
-            start: time
-          },
-        }}
-        className="container"
-        onReady={(event) => setPlayer(event.target)}
-      />
-    )}
-  </div>
-  
-}
+    @media only screen and (min-width: 1600px) {
+      max-width: 1280px;
+    }
+  }
+`
 
 export default YoutubePlayer;
-
-
-

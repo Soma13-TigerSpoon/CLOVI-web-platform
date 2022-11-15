@@ -38,13 +38,13 @@ function VideoItemsList({ videoData }) {
   );
 }
 function getDistinctItemList(videoData) {
-  if (videoData.lists) {
+  if (videoData.timeShopItemLists) {
     let result = {};
     let count = 0;
-    for (let i = 0; i < videoData.lists.length; ++i) {
-      for (let j = 0; j < videoData.lists[i].items.length; ++j) {
-        result[videoData.lists[i].items[j].item.id] =
-          videoData.lists[i].items[j];
+    for (let i = 0; i < videoData.timeShopItemLists.length; ++i) {
+      for (let j = 0; j < videoData.timeShopItemLists[i].items.length; ++j) {
+        result[videoData.timeShopItemLists[i].items[j].item.id] =
+          videoData.timeShopItemLists[i].items[j];
         count += 1;
       }
     }

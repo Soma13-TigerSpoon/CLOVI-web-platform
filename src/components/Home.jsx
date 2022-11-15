@@ -16,7 +16,7 @@ function Home() {
     // console.log('home effect executed');
     (async () => {
       const response = await (
-        await fetch("https://test.clovi.app/api/v1/categories")
+        await fetch("https://api.clovi.app/api/v1/categories")
       ).json();
       // console.log("response:", response);
       setCategories((categories) => response.data);
@@ -26,7 +26,7 @@ function Home() {
     // console.log('home effect executed');
     (async () => {
       const response = await (
-        await fetch("https://test.clovi.app/api/v1/channels")
+        await fetch("https://api.clovi.app/api/v1/channels")
       ).json();
       console.log("response:", response);
       setCreators((creators) => response.data);

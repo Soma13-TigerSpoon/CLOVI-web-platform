@@ -20,8 +20,8 @@ function Video() {
 
   useEffect(() => {
     if (videoData !== null && index > -1) {
-      console.log(videoData.lists);
-      for (const list of videoData.lists) {
+      console.log(videoData.timeShopItemLists);
+      for (const list of videoData.timeShopItemLists) {
         if (list.times.start === timeline[index]) {
           setItems(list.items);
           break;
@@ -38,8 +38,8 @@ function Video() {
       console.log("response:", response);
       setVideoData((videoData) => response.data);
       let tl = [];
-      for (let i = 0; i < response.data.lists.length; ++i) {
-        tl.push(parseInt(response.data.lists[i].times.start));
+      for (let i = 0; i < response.data.timeShopItemLists.length; ++i) {
+        tl.push(parseInt(response.data.timeShopItemLists[i].times.start));
       }
       tl.sort((a, b) => a - b);
       setTimeline(tl);
@@ -152,7 +152,9 @@ const DivBtn = styled.div`
     margin: 10px;
     padding: 10px;
     .leftIcon {
+      -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
+      z-index: -1;
     }
     span {
       padding: 0 10px;
