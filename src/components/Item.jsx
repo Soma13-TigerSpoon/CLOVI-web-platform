@@ -60,7 +60,7 @@ function Item() {
   useEffect(() => {
     (async () => {
       const response = await (
-        await fetch("https://api.clovi.app/api/v1/videoItems/" + itemId)
+        await fetch(process.env.REACT_APP_BASE_API_URL + "v1/videoItems/" + itemId)
       ).json();
       console.log("response:", response);
       const dataProcessed = filteringTime(response.data);
@@ -80,7 +80,7 @@ function Item() {
   useEffect(() => {
     (async () => {
       const response = await (
-        await fetch("https://api.clovi.app/api/v1/item/" + itemId)
+        await fetch(process.env.REACT_APP_BASE_API_URL + "v1/item/" + itemId)
       ).json();
       console.log("response:", response);
       setItemData((itemData) => response.data);

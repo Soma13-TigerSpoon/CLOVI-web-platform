@@ -28,7 +28,7 @@ function Channel() {
   const { channelId } = useParams();
 
   useEffect(() => {
-    const fetchUrl = "https://api.clovi.app/api/v1/search?";
+    const fetchUrl = process.env.REACT_APP_BASE_API_URL + "v1/search?";
     const qsObj = {
       channel: channelId,
     };

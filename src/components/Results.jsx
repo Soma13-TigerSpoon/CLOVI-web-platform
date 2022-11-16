@@ -28,7 +28,7 @@ function Results({ searchParams }) {
     queryStringObj["size"] = 3 * 16;
     const qs = queryString.stringify(queryStringObj);
     // console.log(qs);
-    let fetchUrl = 'https://api.clovi.app/api/v1/search?';
+    let fetchUrl = process.env.REACT_APP_BASE_API_URL + 'v1/search?';
     console.log(`requesting url: ${fetchUrl}` + qs);
     (async () => {
       const response = await (

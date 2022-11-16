@@ -32,7 +32,7 @@ function Video() {
   useEffect(() => {
     (async () => {
       const response = await (
-        await fetch("https://api.clovi.app/api/v1/videos?videoUrl=" + videoId)
+        await fetch(process.env.REACT_APP_BASE_API_URL + "v1/videos?videoUrl=" + videoId)
       ).json();
       console.log("response:", response);
       setVideoData((videoData) => response.data);
