@@ -224,11 +224,11 @@ const Card = styled.div`
           flex-direction: column;
           justify-content: space-between;
           .itemInfo__left__name {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
           }
           .itemInfo__left__colorSize {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 200;
             color: ${(props) => props.theme.text_grey};
           }
@@ -241,13 +241,13 @@ const Card = styled.div`
           width: fit-content;
           justify-content: center;
           .right__price {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
           }
           .right__shopLink {
             display: block;
             margin-top: 10px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             padding: 6px 10px;
             border-radius: 6px;

@@ -146,8 +146,10 @@ const Container = styled.div`
   /* Small Devices, Tablets : ~ 768px */
   @media only screen and (max-width: 768px) {
     ul {
+      margin-left: -10px;
       li {
         width: 33.3%;
+        padding-left: 10px;
         .item {
           .item__texts {
             padding-left: 10px
@@ -159,8 +161,10 @@ const Container = styled.div`
   /* Extra Small Devices, Phones : ~ 480px */
   @media only screen and (max-width: 480px) {
     ul {
+      margin-left: -1px;
       li {
         width: 50%;
+        padding-left: 1px;
       }
     }
   }

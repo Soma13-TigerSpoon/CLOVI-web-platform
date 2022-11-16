@@ -47,9 +47,32 @@ function Video() {
 
   return (
     <>
+      <PcHeader>
+        <Link to={`/channel/${videoData.creator}`}>
+          <div className="header__left">
+            <div className="header__left__back">
+              <svg
+                className="leftIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 42 80"
+              >
+                <path
+                  d="M1 0l40 40.083L1.166 80"
+                  fill="none"
+                  fillRule="evenodd"
+                  stroke="#303033"
+                  strokeWidth="3"
+                ></path>
+              </svg>
+            </div>
+            <div className="header__left__channelName">{videoData.creator}</div>
+          </div>
+          <div className="header__right"></div>
+        </Link>
+      </PcHeader>
       <VBody>
         <div className="videoSection">
-          <Header>
+          <MobileHeader>
             <Link to={`/channel/${videoData.creator}`}>
               <div className="header__left">
                 <div className="header__left__back">
@@ -73,7 +96,7 @@ function Video() {
               </div>
               <div className="header__right"></div>
             </Link>
-          </Header>
+          </MobileHeader>
           <Youtube
             videoId={videoId}
             index={index}
@@ -162,15 +185,16 @@ function Video() {
   );
 }
 
-const Header = styled.header`
+const PcHeader = styled.header`
   display: flex;
+  position: fixed;
   align-items: center;
   justify-content: space-between;
   top: 0;
   width: 100%;
   background-color: #fff;
   z-index: 5;
-  padding: 14px 20px;
+  padding: 24px 30px;
   .header__left {
     display: flex;
     .header__left__back {
@@ -194,11 +218,76 @@ const Header = styled.header`
       line-height: 1;
     }
   }
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
+`;
+
+const MobileHeader = styled.header`
+  display: none;
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 5;
+    padding: 14px 20px;
+    .header__left {
+      display: flex;
+      .header__left__back {
+        margin-right: 10px;
+        .leftIcon {
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+          z-index: -1;
+        }
+        svg {
+          height: 16px;
+          path {
+            stroke: black;
+            stroke-width: 5;
+          }
+        }
+      }
+      .header__left__channelName {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 1;
+      }
+    }
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
 `;
 
 const DivBtn = styled.div`
   /* All Device */
-
   margin-top: 26px;
   width: 100%;
   display: flex;
@@ -217,6 +306,7 @@ const DivBtn = styled.div`
     display: flex;
     align-items: center;
     font-size: 18px;
+    font-weight: bold;
     margin: 10px;
     padding: 10px;
     .leftIcon {
@@ -247,6 +337,8 @@ const DivBtn = styled.div`
     position: fixed;
     bottom: 0;
     background-color: white;
+    padding-bottom: 20px;
+    border-top: 1px solid ${(props) => props.theme.border_grey};
   }
   /* Extra Small Devices, Phones : ~ 480px */
   @media only screen and (max-width: 480px) {
@@ -266,6 +358,7 @@ const DivBtn = styled.div`
 const VBody = styled.div`
   /* All Device */
   .mobile {
+    border-bottom: 1px solid ${(props) => props.theme.border_grey};
     width: 100%;
     display: none;
   }

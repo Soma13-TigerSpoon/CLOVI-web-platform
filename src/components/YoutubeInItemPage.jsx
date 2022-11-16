@@ -14,13 +14,13 @@ const YoutubePlayer = ({ data, play, click, setClick }) => {
   // }, []);
 
   useEffect(() => {
-    console.log('dfsdfsf');
+    console.log("dfsdfsf");
     if (play !== -1) {
-      if (play){
-        console.log('play')
+      if (play) {
+        console.log("play");
         player?.seekTo(data.time);
         player?.playVideo();
-      }else {
+      } else {
         console.log("don't play");
         player?.pauseVideo();
       }
@@ -51,7 +51,7 @@ const YoutubePlayer = ({ data, play, click, setClick }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 24px 0 0;
+  padding-right: 24px;
   .container {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -63,6 +63,22 @@ const Container = styled.div`
       max-width: 1280px;
     }
   }
-`
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+    padding-right: 0;
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
+`;
 
 export default YoutubePlayer;
