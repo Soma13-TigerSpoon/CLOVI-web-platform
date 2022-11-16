@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 function TaggedItemList({ items }) {
   //console.log(index);
@@ -16,7 +17,7 @@ function TaggedItemList({ items }) {
       <ClvMain>
         {items.map((data, index) => (
           <Card key={index}>
-            <a href="naver.com" data-item-id={data.item.id} target="_blank">
+            <Link className="itemLink" to={`/item/${data.item.id}`}>
               <div className="item">
                 <img
                   className="itemImg"
@@ -24,11 +25,47 @@ function TaggedItemList({ items }) {
                   src={data.item.itemImgUrl}
                 />
                 <div className="itemInfo">
-                  <div className="itemInfo__name">
-                    <span >[{data.item.brand}] </span>
-                    <span>{data.item.name}</span>
+                  <div className="itemInfo__left">
+                    <div className="itemInfo__left__name">
+                      <span>[{data.item.brand}] </span>
+                      <span>{data.item.name}</span>
+                    </div>
+                    <div className="itemInfo__left__colorSize">
+                      {data.item.color} / {data.item.size===" " ? '?' : data.item.size}
+                    </div>
                   </div>
-                  <div className="itemInfo__others">
+                  <div className="itemInfo__right">
+                    <div className="right__price">
+                      {data.affiliationLink
+                        ? new Intl.NumberFormat().format(
+                            data.affiliationLink.price
+                          )
+                        : data.item.shops.length > 0
+                        ? new Intl.NumberFormat().format(
+                            data.item.shops[0].price
+                          )
+                        : 0}
+                      원
+                    </div>
+                      <a
+                        className="right__shopLink"
+                        href={data.affiliationLink
+                          ? data.affiliationLink.shopUrl
+                          : data.item.shops.length > 0
+                          ? data.item.shops[0].shopUrl
+                          : "판매처를 찾을 수 없습니다."}
+                        data-item-id={data.item.id}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // e.preventDefault();
+                        }}
+                        type="button"
+                      >
+                        구매 링크
+                        {/* <div className="right__colorSize">구매 링크 가기</div> */}
+                      </a>
+                  </div>
+                  {/* <div className="itemInfo__others">
                     <div className="others__seller">
                       <img
                         className="sellerImg"
@@ -47,29 +84,14 @@ function TaggedItemList({ items }) {
                           : data.item.shops.length > 0
                           ? data.item.shops[0].name
                           : "판매처를 찾을 수 없습니다."}
+                        색상 {data.item.color} / 사이즈 {data.item.size}
                       </div>
                     </div>
-                    <div className="others__right">
-                      <div className="right__price">
-                        {data.affiliationLink
-                          ? new Intl.NumberFormat().format(
-                              data.affiliationLink.price
-                            )
-                          : data.item.shops.length > 0
-                          ? new Intl.NumberFormat().format(
-                              data.item.shops[0].price
-                            )
-                          : 0}
-                        원
-                      </div>
-                      <div className="right__colorSize">
-                        {data.item.color}/{data.item.size}
-                      </div>
-                    </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
-            </a>
+            </Link>
+            {/* <a href="https://naver.com" data-item-id={data.item.id} ></a> */}
           </Card>
         ))}
       </ClvMain>
@@ -78,9 +100,10 @@ function TaggedItemList({ items }) {
 }
 
 const Clovi = styled.div`
+  /* All Devices */
   width: 395px;
   min-height: 88px;
-  height: 100%;
+  /* height: 100%; */
   /* max-height:  */
   /* border-radius: 10px; */
   /* overflow: hidden; */
@@ -88,6 +111,26 @@ const Clovi = styled.div`
   border: 1px solid ${(props) => props.theme.border_grey};
   background-color: ${(props) => props.theme.background_grey};
   /* box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px; */
+
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    border: 0;
+    width: 100%;
+    min-height: 0;
+    /* border-bottom: 1px solid ${(props) => props.theme.border_grey}; */
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
 `;
 
 const ClvHeader = styled.header`
@@ -115,6 +158,8 @@ const ClvHeader = styled.header`
   }
 `;
 const ClvMain = styled.div`
+  /* All Device */
+
   padding: 0 9px 9px 9px;
   display: flex;
   max-height: 530px;
@@ -129,6 +174,23 @@ const ClvMain = styled.div`
   @media only screen and (min-width: 1600px) {
     max-height: 676px;
   }
+
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    padding: 0;
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
 `;
 
 const Card = styled.div`
@@ -136,64 +198,89 @@ const Card = styled.div`
   margin-top: 5px;
   display: flex;
   border-bottom: #f2f2f2 solid 1px;
-  a {
+
+  .itemLink {
     width: 100%;
-  }
-  .item {
-    background-color: white;
-    padding: 8px 14px 8px 8px;
-    width: 100%;
-    display: flex;
-    &:hover {
-      /* background-color: #f2f2f2; */
-      cursor: pointer;
-    }
-    .itemImg {
-      width: 80px;
-      margin-right: 8px;
-    }
-    .itemInfo {
+    .item {
+      background-color: white;
+      padding: 8px 14px 8px 8px;
       width: 100%;
       display: flex;
-      flex-direction: column;
-      padding: 5px 0px;
-      justify-content: space-between;
-      .itemInfo__name {
-        font-size: 14px;
-        font-weight: 500;
+      &:hover {
+        /* background-color: #f2f2f2; */
+        cursor: pointer;
       }
-      .itemInfo__others {
+      .itemImg {
+        width: 80px;
+        margin-right: 8px;
+      }
+      .itemInfo {
+        width: 100%;
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
-        .others__seller {
+        padding: 10px 0px;
+        .itemInfo__left {
           display: flex;
-          .sellerImg {
-            width: 12px;
-            object-fit: contain;
-            margin-right: 5px;
+          flex-direction: column;
+          justify-content: space-between;
+          .itemInfo__left__name {
+            font-size: 14px;
+            font-weight: 500;
           }
-          .seller__name {
-            font-size: 12px;
+          .itemInfo__left__colorSize {
+            font-size: 13px;
             font-weight: 200;
+            color: ${(props) => props.theme.text_grey};
           }
         }
-        .others__right {
+        .itemInfo__right {
+          min-width: 76px;
           display: flex;
           flex-direction: column;
           align-items: flex-end;
+          width: fit-content;
+          justify-content: center;
           .right__price {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
           }
-          .right__colorSize {
-            margin-top: 5px;
-            font-size: 12px;
-            font-weight: 200;
+          .right__shopLink {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid ${(props) => props.theme.clovi_red};
+            color: ${(props) => props.theme.clovi_red};
+            &:active, &:hover {
+              color: white;
+              background: ${(props) => props.theme.clovi_red};
+            }
+            /* &:hover {
+              color: white;
+              background: ${(props) => props.theme.clovi_red};
+            } */
           }
         }
       }
     }
+  }
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    margin-top: 0;
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
   }
 `;
 

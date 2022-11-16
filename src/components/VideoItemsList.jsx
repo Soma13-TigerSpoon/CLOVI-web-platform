@@ -10,7 +10,7 @@ function VideoItemsList({ videoData }) {
       <ul>
         {itemList.map((item, index) => {
           const { brand, color, id, itemImgUrl, name, shops, order, size } =
-          item.item;
+            item.item;
           return (
             <li key={index}>
               <Link to={`/item/${id}`}>
@@ -57,13 +57,33 @@ function getDistinctItemList(videoData) {
 }
 
 const H2 = styled.h2`
+  /* All Devices */
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 15px;
   letter-spacing: -0.5px;
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    padding-left: 6px;
+    font-size: 18px;
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+    font-size: 16px;
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
 `;
 
 const Container = styled.div`
+  /* All Devices */
   width: 100%;
   max-width: 1000px;
   margin-top: 40px;
@@ -116,6 +136,40 @@ const Container = styled.div`
         }
       }
     }
+  }
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    ul {
+      margin-left: -10px;
+      li {
+        width: 33.3%;
+        padding-left: 10px;
+        .item {
+          .item__texts {
+            padding-left: 10px
+          }
+        }
+      }
+    }
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+    ul {
+      margin-left: -1px;
+      li {
+        width: 50%;
+        padding-left: 1px;
+      }
+    }
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
   }
 `;
 

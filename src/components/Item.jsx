@@ -5,7 +5,6 @@ import YoutubePlayer from "./YoutubeInItemPage";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import Header from "./Header";
 import { useRef } from "react";
 
 /**
@@ -61,7 +60,7 @@ function Item() {
   useEffect(() => {
     (async () => {
       const response = await (
-        await fetch("https://api.clovi.app/api/v1/videoItems/" + itemId)
+        await fetch(process.env.REACT_APP_BASE_API_URL + "v1/videoItems/" + itemId)
       ).json();
       console.log("response:", response);
       const dataProcessed = filteringTime(response.data);
@@ -81,7 +80,7 @@ function Item() {
   useEffect(() => {
     (async () => {
       const response = await (
-        await fetch("https://api.clovi.app/api/v1/item/" + itemId)
+        await fetch(process.env.REACT_APP_BASE_API_URL + "v1/item/" + itemId)
       ).json();
       console.log("response:", response);
       setItemData((itemData) => response.data);
@@ -90,7 +89,29 @@ function Item() {
 
   return (
     <>
-      <Header></Header>
+      {/* <Header>
+        <Link to={`/channel/${videoData.creator}`}>
+          <div className="header__left">
+            <div className="header__left__back">
+              <svg
+                className="leftIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 42 80"
+              >
+                <path
+                  d="M1 0l40 40.083L1.166 80"
+                  fill="none"
+                  fillRule="evenodd"
+                  stroke="#303033"
+                  strokeWidth="3"
+                ></path>
+              </svg>
+            </div>
+            <div className="header__left__channelName">{videoData.creator}</div>
+          </div>
+          <div className="header__right"></div>
+        </Link>
+      </Header> */}
       <ItemPage>
         <div className="itemInfo">
           <div className="itemInfo__img">
@@ -213,15 +234,20 @@ function Item() {
                             </div>
                           </div>
                           <div className="card__right">
-                            <div className="channelInfo">
-                              <div>{data.channelName}</div>
-                              <a
-                                href={`https://www.youtube.com/watch?v=${data.videoUrl}&t=${data.time}s`}
-                                target="_blank"
-                                rel="noreferrer"
+                            <div className="right__channelInfo">
+                              {/* <div>{data.channelName}</div> */}
+                              <Link
+                                to={`/video/${data.videoUrl}`}
+                                // href={`https://www.youtube.com/watch?v=${data.videoUrl}&t=${data.time}s`}
+                                // target="_blank"
+                                // rel="noreferrer"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  // e.preventDefault();
+                                }}
                               >
-                                바로가기
-                              </a>
+                                영상 보러가기
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -237,13 +263,48 @@ function Item() {
   );
 }
 
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 5;
+  padding: 14px 20px;
+  .header__left {
+    display: flex;
+    .header__left__back {
+      margin-right: 10px;
+      .leftIcon {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        z-index: -1;
+      }
+      svg {
+        height: 16px;
+        path {
+          stroke: black;
+          stroke-width: 5;
+        }
+      }
+    }
+    .header__left__channelName {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1;
+    }
+  }
+`;
+
 const ItemPage = styled.div`
+  /* All Device */
   display: flex;
   height: 100%;
   flex-direction: column;
   margin: 100px auto 0;
   max-width: 1300px;
-  min-width: 900px;
+  /* min-width: 900px; */
   padding: 40px 50px 0;
   .itemInfo {
     width: 100%;
@@ -310,6 +371,60 @@ const ItemPage = styled.div`
       display: block;
     }
   }
+
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+    padding: 0 20px;
+    margin: 0 auto 0;
+    .itemInfo {
+      flex-direction: column;
+      .itemInfo__img {
+        width: 100%;
+      }
+      .itemInfo__texts {
+        padding-left: 0;
+        .texts__brand {
+          padding: 12px 0;
+          font-size: 16px;
+        }
+        .texts__name {
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+        .texts__price {
+          font-size: 18px;
+          padding: 14px 0;
+        }
+      }
+    }
+    .youtubeShoppingGuide {
+      margin-top: 20px;
+      .youtubeShoppingGuide__title {
+        font-size: 18px;
+        padding-bottom: 14px;
+      }
+      .youtubeShoppingGuide__main {
+        padding-top: 0;
+        flex-direction: column;
+        .main__ytEmbedded {
+          margin-left: -20px;
+          width: 100vw;
+        }
+      }
+    }
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
 `;
 
 const CloviBox = styled.div`
@@ -357,6 +472,24 @@ const CloviBox = styled.div`
         font-size: 16px;
       }
     }
+  }
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+    .box {
+      width: 100%;
+    }
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
   }
 `;
 
@@ -432,6 +565,25 @@ const AppearanceList = styled(CloviBox)`
           }
         }
         .card__right {
+          display: flex;
+          align-items: center;
+          font-weight: 400;
+          font-size: 13px;
+          margin-top: 10px;
+          font-size: 13px;
+          font-weight: 500;
+          padding: 6px 10px;
+          border-radius: 6px;
+          border: 1px solid ${(props) => props.theme.clovi_red};
+          color: ${(props) => props.theme.clovi_red};
+          background: white;
+          &:active, &:hover {
+            color: white;
+            background: ${(props) => props.theme.clovi_red};
+          }
+          .right__channelInfo {
+
+          }
         }
       }
     }

@@ -53,7 +53,7 @@ function Youtube({ videoId, index, setIndex, timeline, buttonClick }) {
         videoId={videoId}
         opts={{
           playerVars: {
-            autoplay: 0,
+            autoplay: 1,
           },
         }}
         className="container"

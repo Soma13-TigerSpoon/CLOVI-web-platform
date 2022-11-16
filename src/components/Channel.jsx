@@ -26,10 +26,9 @@ function Channel() {
   const [items, setItems] = useState([]);
   const [videos, setVideos] = useState([]);
   const { channelId } = useParams();
-  
 
   useEffect(() => {
-    const fetchUrl = "https://api.clovi.app/api/v1/search?";
+    const fetchUrl = process.env.REACT_APP_BASE_API_URL + "v1/search?";
     const qsObj = {
       channel: channelId,
     };
@@ -79,7 +78,10 @@ function Channel() {
         <SwiperSlide>
           <ChannelProfile className="profile">
             <div className="profile__img">
-              <img src={videos.length ? videos[0].profileImgUrl : ''} alt="profile" />
+              <img
+                src={videos.length ? videos[0].profileImgUrl : ""}
+                alt="profile"
+              />
             </div>
             <div className="profile__name">
               <span>{channelId}</span>
@@ -91,11 +93,6 @@ function Channel() {
           <ItemsList items={items}></ItemsList>
         </SwiperSlide>
       </Swiper>
-      <main>
-        <ul className="items">
-          <li>제품1</li>
-        </ul>
-      </main>
     </Container>
   );
 }
@@ -104,13 +101,11 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
   top: 0;
   width: 100%;
   background-color: #fff;
   z-index: 5;
-  padding: 18px 20px;
-  height: 60px;
+  padding: 14px 20px;
   .header__left {
     display: flex;
     .header__left__back {
@@ -121,7 +116,7 @@ const Header = styled.header`
         z-index: -1;
       }
       svg {
-        width: 9px;
+        height: 16px;
         path {
           stroke: black;
           stroke-width: 5;
@@ -130,17 +125,20 @@ const Header = styled.header`
     }
     .header__left__channelName {
       font-weight: bold;
+      font-size: 16px;
+      line-height: 1;
     }
   }
 `;
 
 const Container = styled.div`
-  /* height: 100%; */
+  height: 100%;
+  /* max-height: 100vh; */
+
   .swiper {
     /* width: 100%;
   height: 100%; */
-    position: relative;
-    top: 97px;
+    top: 43px;
   }
   .swiper-slide {
     /* All Device */
@@ -183,13 +181,13 @@ const Container = styled.div`
   }
   .swiper-pagination {
     position: fixed;
-    top: 54px;
+    top: 48.2px;
     width: 100%;
     background: white;
     height: fit-content;
     display: flex;
     justify-content: space-around;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .swiper-pagination-bullet {
     height: fit-content;
@@ -198,7 +196,7 @@ const Container = styled.div`
     text-align: center;
     line-height: 20px;
     font-size: 14px;
-    color: ${props => props.theme.youtube_grey};
+    color: ${(props) => props.theme.youtube_grey};
     opacity: 1;
     background: white;
     border-radius: 0;
@@ -219,7 +217,7 @@ const ChannelProfile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 40px 20px 20px 20px;
   margin-bottom: 10px;
   .profile__img {
     width: 60px;
