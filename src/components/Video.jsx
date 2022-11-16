@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Youtube from "./Youtube";
 import TaggedItemList from "./TaggedItemList";
 import VideoItemsList from "./VideoItemsList";
-import Header from "./Header";
 
 function Video() {
   const [index, setIndex] = useState(-1);
@@ -15,8 +14,8 @@ function Video() {
   let { videoId } = useParams();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (videoData !== null && index > -1) {
@@ -48,9 +47,33 @@ function Video() {
 
   return (
     <>
-      <Header></Header>
       <VBody>
         <div className="videoSection">
+          <Header>
+            <Link to={`/channel/${videoData.creator}`}>
+              <div className="header__left">
+                <div className="header__left__back">
+                  <svg
+                    className="leftIcon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 42 80"
+                  >
+                    <path
+                      d="M1 0l40 40.083L1.166 80"
+                      fill="none"
+                      fillRule="evenodd"
+                      stroke="#303033"
+                      strokeWidth="3"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="header__left__channelName">
+                  {videoData.creator}
+                </div>
+              </div>
+              <div className="header__right"></div>
+            </Link>
+          </Header>
           <Youtube
             videoId={videoId}
             index={index}
@@ -59,11 +82,20 @@ function Video() {
             buttonClick={buttonClick}
           ></Youtube>
           {videoData !== null ? (
-            <TaggedItemList items={items}></TaggedItemList>
+            <div className="pc">
+              <TaggedItemList items={items}></TaggedItemList>
+            </div>
           ) : (
             ""
           )}
         </div>
+        {videoData !== null ? (
+          <div className="mobile">
+            <TaggedItemList items={items}></TaggedItemList>
+          </div>
+        ) : (
+          ""
+        )}
         <DivBtn className="Btn_time">
           <button
             id="left"
@@ -91,7 +123,7 @@ function Video() {
             <span>이전 옷 보기</span>
           </button>
           <div className="indexing">
-            <span>{index > -1 ? index+1 : 0}</span>
+            <span>{index > -1 ? index + 1 : 0}</span>
             <span className="indexing__slash">/</span>
             <span>{timeline ? timeline.length : 0}</span>
           </div>
@@ -130,7 +162,43 @@ function Video() {
   );
 }
 
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 5;
+  padding: 14px 20px;
+  .header__left {
+    display: flex;
+    .header__left__back {
+      margin-right: 10px;
+      .leftIcon {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        z-index: -1;
+      }
+      svg {
+        height: 16px;
+        path {
+          stroke: black;
+          stroke-width: 5;
+        }
+      }
+    }
+    .header__left__channelName {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1;
+    }
+  }
+`;
+
 const DivBtn = styled.div`
+  /* All Device */
+
   margin-top: 26px;
   width: 100%;
   display: flex;
@@ -167,9 +235,40 @@ const DivBtn = styled.div`
       }
     }
   }
+
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+    .indexing {
+      font-size: 18px;
+    }
+    button {
+      font-size: 14px;
+      margin: 10px 5px;
+    }
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
+  }
 `;
 
 const VBody = styled.div`
+  /* All Device */
+  .mobile {
+    width: 100%;
+    display: none;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,6 +281,38 @@ const VBody = styled.div`
     .player {
       max-width: 1280px;
     }
+  }
+  /* Large Devices, Wide Screens : ~ 1200px */
+  @media only screen and (max-width: 1200px) {
+  }
+  /* Medium Devices, Desktops : ~ 992px */
+  @media only screen and (max-width: 992px) {
+  }
+  /* Small Devices, Tablets : ~ 768px */
+  @media only screen and (max-width: 768px) {
+    .pc {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+    padding: 0;
+    .videoSection {
+      position: sticky;
+      top: 0;
+      flex-direction: column;
+      .player {
+        position: sticky;
+        top: 0;
+        padding: 0;
+      }
+    }
+  }
+  /* Extra Small Devices, Phones : ~ 480px */
+  @media only screen and (max-width: 480px) {
+  }
+  /* Custom, iPhone Retina : ~ 320px */
+  @media only screen and (max-width: 320px) {
   }
 `;
 
