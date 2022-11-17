@@ -300,7 +300,6 @@ const Header = styled.header`
 const ItemPage = styled.div`
   /* All Device */
   display: flex;
-  height: 100%;
   flex-direction: column;
   margin: 100px auto 0;
   max-width: 1300px;
@@ -383,8 +382,8 @@ const ItemPage = styled.div`
   }
   /* Extra Small Devices, Phones : ~ 480px */
   @media only screen and (max-width: 480px) {
-    padding: 0 20px;
-    margin: 0 auto 0;
+    padding: 0 20px 30px;
+    margin: 0 auto;
     .itemInfo {
       flex-direction: column;
       .itemInfo__img {
