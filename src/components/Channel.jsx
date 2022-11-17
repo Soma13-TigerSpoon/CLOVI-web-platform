@@ -49,25 +49,27 @@ function Channel() {
   return (
     <Container>
       <Header>
-        <div className="header__left">
-          <div className="header__left__back">
-            <svg
-              className="leftIcon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 42 80"
-            >
-              <path
-                d="M1 0l40 40.083L1.166 80"
-                fill="none"
-                fillRule="evenodd"
-                stroke="#303033"
-                strokeWidth="3"
-              ></path>
-            </svg>
+        <Link to="">
+          <div className="header__left">
+            <div className="header__left__back">
+              <svg
+                className="leftIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 42 80"
+              >
+                <path
+                  d="M1 0l40 40.083L1.166 80"
+                  fill="none"
+                  fillRule="evenodd"
+                  stroke="#303033"
+                  strokeWidth="3"
+                ></path>
+              </svg>
+            </div>
+            <div className="header__left__channelName">{channelId}</div>
           </div>
-          <div className="header__left__channelName">{channelId}</div>
-        </div>
-        <div className="header__right"></div>
+        </Link>
+          <div className="header__right"></div>
       </Header>
 
       <Swiper
@@ -101,6 +103,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
   top: 0;
   width: 100%;
   background-color: #fff;
@@ -139,6 +142,7 @@ const Container = styled.div`
     /* width: 100%;
   height: 100%; */
     top: 43px;
+    padding-bottom: 63px;
   }
   .swiper-slide {
     /* All Device */
@@ -181,13 +185,14 @@ const Container = styled.div`
   }
   .swiper-pagination {
     position: fixed;
-    top: 48.2px;
+    bottom: 0;
     width: 100%;
     background: white;
     height: fit-content;
     display: flex;
     justify-content: space-around;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
   }
   .swiper-pagination-bullet {
     height: fit-content;
@@ -203,11 +208,10 @@ const Container = styled.div`
     &:active {
       background-color: none;
     }
-    bottom: -1px;
   }
 
   .swiper-pagination-bullet-active {
-    border-bottom: solid black 2px;
+    border-top: solid black 2px;
     color: black;
   }
 `;
