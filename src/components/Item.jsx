@@ -32,7 +32,7 @@ function Item() {
   let { itemId } = useParams();
   const [index, setIndex] = useState(-1);
   const [click, setClick] = useState(false);
-  const [{ itemImgUrl, brand, name, shops }, setItemData] = useState({});
+  const [{ itemImgUrl, brand, name, shops, size, color }, setItemData] = useState({});
   const [videoData, setVideoData] = useState();
   const videosRef = useRef([]);
   const [playStates, setPlayStates] = useState([]);
@@ -230,7 +230,7 @@ function Item() {
                               </div>
                             </div>
                             <div className="left__wearing">
-                              {data.size}Size 착용
+                              {color} / {size} 착용
                             </div>
                           </div>
                           <div className="card__right">
