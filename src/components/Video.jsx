@@ -336,7 +336,7 @@ const DivBtn = styled.div`
   @media only screen and (max-width: 768px) {
     position: fixed;
     bottom: 0;
-    background-color: white;
+    background-color: #EFEFEF;
     padding-bottom: 20px;
     border-top: 1px solid ${(props) => props.theme.border_grey};
   }
