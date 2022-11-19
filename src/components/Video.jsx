@@ -10,6 +10,7 @@ function Video() {
   const [videoData, setVideoData] = useState([]);
   const [timeline, setTimeline] = useState([]);
   const [items, setItems] = useState([]);
+  const [model, setModel] = useState([]);
   const [buttonClick, setButtonClick] = useState(0);
   let { videoId } = useParams();
 
@@ -23,6 +24,7 @@ function Video() {
       for (const list of videoData.timeShopItemLists) {
         if (list.times.start === timeline[index]) {
           setItems(list.items);
+          setModel(list.model);
           break;
         }
       }
@@ -106,7 +108,7 @@ function Video() {
           ></Youtube>
           {videoData !== null ? (
             <div className="pc">
-              <TaggedItemList items={items}></TaggedItemList>
+              <TaggedItemList items={items} model={model}></TaggedItemList>
             </div>
           ) : (
             ""
@@ -114,7 +116,7 @@ function Video() {
         </div>
         {videoData !== null ? (
           <div className="mobile">
-            <TaggedItemList items={items}></TaggedItemList>
+            <TaggedItemList items={items} model={model}></TaggedItemList>
           </div>
         ) : (
           ""

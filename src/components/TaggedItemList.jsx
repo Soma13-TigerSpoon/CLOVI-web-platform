@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-function TaggedItemList({ items }) {
+function TaggedItemList({ items, model }) {
   //console.log(index);
   return (
     <Clovi>
@@ -12,6 +12,9 @@ function TaggedItemList({ items }) {
             src={`${process.env.REACT_APP_IMAGE_RESOURCE_URL}clovi-img-logo-w-text.png`}
           ></img>
           <span>자동 검색 서비스</span>
+        </div>
+        <div className="header__right">
+          { model.name ? `${model.name} ${model.height_cm}cm ${model.weight_kg}kg` : '' }
         </div>
       </ClvHeader>
       <ClvMain>
@@ -31,7 +34,8 @@ function TaggedItemList({ items }) {
                       <span>{data.item.name}</span>
                     </div>
                     <div className="itemInfo__left__colorSize">
-                      {data.item.color} / {data.item.size===" " ? '?' : data.item.size}
+                      {data.item.color} /{" "}
+                      {data.item.size === " " ? "?" : data.item.size} 착용
                     </div>
                   </div>
                   <div className="itemInfo__right">
@@ -47,23 +51,25 @@ function TaggedItemList({ items }) {
                         : 0}
                       원
                     </div>
-                      <a
-                        className="right__shopLink"
-                        href={data.affiliationLink
+                    <a
+                      className="right__shopLink"
+                      href={
+                        data.affiliationLink
                           ? data.affiliationLink.shopUrl
                           : data.item.shops.length > 0
                           ? data.item.shops[0].shopUrl
-                          : "판매처를 찾을 수 없습니다."}
-                        data-item-id={data.item.id}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // e.preventDefault();
-                        }}
-                        type="button"
-                      >
-                        구매 링크
-                        {/* <div className="right__colorSize">구매 링크 가기</div> */}
-                      </a>
+                          : "판매처를 찾을 수 없습니다."
+                      }
+                      data-item-id={data.item.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // e.preventDefault();
+                      }}
+                      type="button"
+                    >
+                      구매 링크
+                      {/* <div className="right__colorSize">구매 링크 가기</div> */}
+                    </a>
                   </div>
                   {/* <div className="itemInfo__others">
                     <div className="others__seller">
@@ -155,6 +161,12 @@ const ClvHeader = styled.header`
       font-weight: bold;
       padding-top: 1px;
     }
+  }
+  .header__right {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: bold;
   }
 `;
 const ClvMain = styled.div`
@@ -253,7 +265,8 @@ const Card = styled.div`
             border-radius: 6px;
             border: 1px solid ${(props) => props.theme.clovi_red};
             color: ${(props) => props.theme.clovi_red};
-            &:active, &:hover {
+            &:active,
+            &:hover {
               color: white;
               background: ${(props) => props.theme.clovi_red};
             }
