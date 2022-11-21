@@ -49,7 +49,7 @@ function Channel() {
   return (
     <Container>
       <Header>
-        <Link to="">
+        <Link to="/">
           <div className="header__left">
             <div className="header__left__back">
               <svg
