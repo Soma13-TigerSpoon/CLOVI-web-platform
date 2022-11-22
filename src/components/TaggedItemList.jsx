@@ -246,7 +246,7 @@ const Card = styled.div`
           }
         }
         .itemInfo__right {
-          min-width: 76px;
+          min-width: 80px;
           display: flex;
           flex-direction: column;
           align-items: flex-end;
