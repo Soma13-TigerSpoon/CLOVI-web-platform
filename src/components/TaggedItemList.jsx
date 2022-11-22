@@ -252,6 +252,7 @@ const Card = styled.div`
           align-items: flex-end;
           width: fit-content;
           justify-content: center;
+          margin-left: 10px;
           .right__price {
             font-size: 15px;
             font-weight: 600;
