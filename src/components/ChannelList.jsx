@@ -79,20 +79,20 @@ const Title = styled.div`
 `;
 const Main = styled.main`
   li {
-    width: 200px;
+    width: 220px;
     margin-bottom: 20px;
     .creator {
       display: flex;
       align-items: center;
       .creator__img {
-        margin-right: 20px;
+        margin-right: 18px;
         img {
           width: 50px;
           border-radius: 50%;
         }
       }
       .creator__name {
-        font-size: 20px;
+        font-size: 18px;
       }
     }
   }
