@@ -65,7 +65,9 @@ function TaggedItemList({ items, model }) {
                         e.stopPropagation();
                         // e.preventDefault();
                       }}
-                      type="button"
+                      type="button" 
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       구매 링크
                       {/* <div className="right__colorSize">구매 링크 가기</div> */}
@@ -196,6 +198,7 @@ const ClvMain = styled.div`
   /* Small Devices, Tablets : ~ 768px */
   @media only screen and (max-width: 768px) {
     padding: 0;
+    max-height: none;
   }
   /* Extra Small Devices, Phones : ~ 480px */
   @media only screen and (max-width: 480px) {
