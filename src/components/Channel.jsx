@@ -32,7 +32,7 @@ function Channel() {
     const qsObj = {
       channel: channelId,
     };
-    qsObj["size"] = 200;
+    qsObj["size"] = 300;
     const qs = queryString.stringify(qsObj);
     (async () => {
       const response = await (await fetch(fetchUrl + qs)).json();
