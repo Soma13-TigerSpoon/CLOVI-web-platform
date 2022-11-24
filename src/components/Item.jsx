@@ -461,6 +461,8 @@ const CloviBox = styled.div`
       }
     }
     .box__main {
+      max-height: 300px;
+      overflow-y: scroll;
       .card {
         margin: 5px 5px 0px 5px;
         border-bottom: #f2f2f2 solid 1px;
