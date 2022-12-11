@@ -3,11 +3,13 @@ import Channel from "./components/Channel";
 import ChannelList from "./components/ChannelList";
 import Home from "./components/Home";
 import Item from "./components/Item";
+import ScrollToTop from "./components/ScrollTop";
 import Video from "./components/Video";
 
 function Router() {
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         {/* <Route path="/" element={<Navigate to="/list/items" />}></Route>
         <Route path="/list" element={<Navigate to="/list/items" />}></Route>
